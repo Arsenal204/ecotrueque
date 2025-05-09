@@ -1,84 +1,82 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="text-xl font-bold text-white leading-tight">
             {{ __('Añadir nuevo objeto') }}
         </h2>
     </x-slot>
 
-    <div class="max-w-2xl mx-auto mt-10 bg-white dark:bg-gray-800 p-6 rounded shadow">
+    <div class="py-6" style="background-color: #AB80E5;">
+        <div class="max-w-2xl mx-auto bg-[#B4007C] p-6 rounded shadow text-black">
+            <form method="POST" action="{{ route('objetos.store') }}" enctype="multipart/form-data">
+                @csrf
 
-        {{-- Mostrar errores de validación --}}
-        @if ($errors->any())
-            <div class="mb-4 p-4 bg-red-100 text-red-800 rounded">
-                <strong>Errores en el formulario:</strong>
-                <ul class="mt-2 list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+                <!-- Título -->
+                <div class="mb-4">
+                    <label for="titulo" class="block text-sm font-medium text-white">Título</label>
+                    <input type="text" name="titulo" id="titulo" required
+                        class="mt-1 block w-full rounded bg-white text-black p-2">
+                </div>
 
-        <form method="POST" action="{{ route('objetos.store') }}" enctype="multipart/form-data">
-            @csrf
+                <!-- Descripción -->
+                <div class="mb-4">
+                    <label for="descripcion" class="block text-sm font-medium text-white">Descripción</label>
+                    <textarea name="descripcion" id="descripcion" rows="3" class="mt-1 block w-full rounded bg-white text-black p-2"></textarea>
+                </div>
 
-            <!-- Título -->
-            <div class="mb-4">
-                <label for="titulo" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Título</label>
-                <input type="text" name="titulo" id="titulo" required
-                    class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
-            </div>
+                <!-- Estado -->
+                <div class="mb-4">
+                    <label for="estado" class="block text-sm font-medium text-white">Estado</label>
+                    <input type="text" name="estado" id="estado" required
+                        class="mt-1 block w-full rounded bg-white text-black p-2">
+                </div>
 
-            <!-- Descripción -->
-            <div class="mb-4">
-                <label for="descripcion"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
-                <textarea name="descripcion" id="descripcion" rows="3"
-                    class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"></textarea>
-            </div>
+                <!-- Tipo de oferta -->
+                <div class="mb-4">
+                    <label for="tipo_oferta" class="block text-sm font-medium text-white">Tipo de oferta</label>
+                    <select name="tipo_oferta" id="tipo_oferta"
+                        class="mt-1 block w-full rounded bg-white text-black p-2">
+                        <option value="donación">Donación</option>
+                        <option value="trueque">Trueque</option>
+                    </select>
+                </div>
 
-            <!-- Estado -->
-            <div class="mb-4">
-                <label for="estado" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Estado</label>
-                <input type="text" name="estado" id="estado" required
-                    class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
-            </div>
+                <!-- Categoría -->
+                <div class="mb-4">
+                    <label for="categoria" class="block text-sm font-medium text-white">Categoría</label>
+                    <select name="categoria" id="categoria" class="mt-1 block w-full rounded bg-white text-black p-2">
+                        @foreach ($categorias as $categoria)
+                            <option value="{{ $categoria->id }}">{{ $categoria->nombre_categoria }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <!-- Tipo de oferta -->
-            <div class="mb-4">
-                <label for="tipo_oferta" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tipo de
-                    oferta</label>
-                <select name="tipo_oferta" id="tipo_oferta"
-                    class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
-                    <option value="donación">Donación</option>
-                    <option value="trueque">Trueque</option>
-                </select>
-            </div>
+                <!-- Imágenes -->
+                <div class="mb-4">
+                    <label for="imagenes" class="block text-sm font-medium text-white">Imágenes</label>
+                    <input type="file" name="imagenes[]" id="imagenes" multiple
+                        class="mt-1 block w-full text-sm bg-white text-black border border-gray-300 rounded p-2">
+                </div>
 
-            <!-- Categoría -->
-            <select name="categoria" id="categoria"
-                class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                required>
-                @foreach ($categorias as $categoria)
-                    <option value="{{ $categoria->id }}">{{ $categoria->nombre_categoria }}</option>
-                @endforeach
-            </select>
+                <!-- Errores -->
+                @if ($errors->any())
+                    <div class="mb-4 p-4 rounded" style="background-color: #FF0202; color: white;">
+                        <strong>Errores en el formulario:</strong>
+                        <ul class="mt-2 list-disc list-inside text-white">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-
-            <!-- Subida de imágenes -->
-            <div class="mb-4">
-                <label for="imagenes"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imágenes</label>
-                <input type="file" name="imagenes[]" id="imagenes" multiple
-                    class="mt-1 block w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 dark:text-white border border-gray-300 rounded">
-            </div>
-
-            <!-- Botón de enviar -->
-            <div class="text-right">
-                <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                    Publicar objeto
-                </button>
-            </div>
-        </form>
+                <!-- Botón -->
+                <div class="text-right">
+                    <button type="submit"
+                        class="px-4 py-2 bg-[#45F85A] text-black rounded hover:bg-green-500 font-semibold">
+                        Publicar objeto
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </x-app-layout>

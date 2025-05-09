@@ -13,6 +13,11 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified', 'rolemanager:donante,receptor'])
+    ->name('dashboard');
+
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
