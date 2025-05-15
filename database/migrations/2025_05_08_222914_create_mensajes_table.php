@@ -15,7 +15,7 @@ return new class extends Migration
             $table->dateTime('fecha_envio')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreignId('id_emisor')->constrained('users');
             $table->foreignId('id_receptor')->constrained('users');
-            $table->foreignId('intercambio')->constrained('intercambios');
+            $table->foreignId('id_intercambio')->nullable()->constrained('intercambios')->onDelete('cascade');
             $table->timestamps();
         });
     }

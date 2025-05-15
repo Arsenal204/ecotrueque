@@ -42,14 +42,26 @@
 
                 <!-- Categoría -->
                 <div class="mb-4">
-                    <label for="categoria" class="block text-sm font-medium text-white">Categoría</label>
-                    <select name="categoria" id="categoria" class="mt-1 block w-full rounded bg-white text-black p-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Categoría existente
+                    </label>
+                    <select name="categoria" id="categoria"
+                        class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                        <option value="">-- Selecciona una categoría existente --</option>
                         @foreach ($categorias as $categoria)
                             <option value="{{ $categoria->id }}">{{ $categoria->nombre_categoria }}</option>
                         @endforeach
                     </select>
                 </div>
 
+                <div class="mb-4">
+                    <label for="nueva_categoria" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        O crea una nueva categoría
+                    </label>
+                    <input type="text" name="nueva_categoria" id="nueva_categoria"
+                        placeholder="Ej: Juguetes, Herramientas..."
+                        class="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                </div>
                 <!-- Imágenes -->
                 <div class="mb-4">
                     <label for="imagenes" class="block text-sm font-medium text-white">Imágenes</label>

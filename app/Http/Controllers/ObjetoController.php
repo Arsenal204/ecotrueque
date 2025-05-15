@@ -32,9 +32,21 @@ class ObjetoController extends Controller
             'descripcion' => 'nullable|string',
             'estado' => 'required|string|max:50',
             'tipo_oferta' => 'required|in:donación,trueque',
-            'categoria' => 'required|exists:categorias,id',
-            'imagenes.*' => 'nullable|image|mimes:jpg,jpeg,png|max:5120'
+            'categoria' => 'nullable|exists:categorias,id',
+            'nueva_categoria' => 'nullable|string|max:255',
+            'imagenes.*' => 'nullable|image|max:5120',
         ]);
+
+        // Prioridad a la nueva categoría si está definida
+        if ($request->filled('nueva_categoria')) {
+            $categoria = Categoria::firstOrCreate(
+                ['nombre_categoria' => $request->nueva_categoria],
+                ['descripcion_categoria' => null]
+            );
+            $categoriaId = $categoria->id;
+        } else {
+            $categoriaId = $request->categoria;
+        }
 
         $objeto = Objeto::create([
             'titulo' => $request->titulo,
@@ -42,10 +54,11 @@ class ObjetoController extends Controller
             'estado' => $request->estado,
             'tipo_oferta' => $request->tipo_oferta,
             'usuario' => Auth::id(),
-            'categoria' => $request->categoria,
+            'categoria' => $categoriaId,
             'fecha_publicacion' => now(),
         ]);
 
+        // Guardar imágenes si se subieron
         if ($request->hasFile('imagenes')) {
             foreach ($request->file('imagenes') as $img) {
                 $ruta = $img->store('galerias', 'public');
@@ -61,6 +74,7 @@ class ObjetoController extends Controller
 
         return redirect()->route('objetos.index')->with('success', 'Objeto publicado correctamente.');
     }
+
 
     public function show(Objeto $objeto)
     {
@@ -130,5 +144,24 @@ class ObjetoController extends Controller
         $objeto->delete();
 
         return redirect()->route('objetos.index')->with('success', 'Objeto eliminado.');
+    }
+
+
+
+    public function explorar(Request $request)
+    {
+        $categoriaId = $request->input('categoria');
+
+        $query = Objeto::with('categoria', 'imagenes')
+            ->where('usuario', '!=', Auth::id());
+
+        if ($categoriaId) {
+            $query->where('categoria', $categoriaId);
+        }
+
+        $objetos = $query->latest()->get();
+        $categorias = Categoria::all();
+
+        return view('objetos.explorar', compact('objetos', 'categorias', 'categoriaId'));
     }
 }

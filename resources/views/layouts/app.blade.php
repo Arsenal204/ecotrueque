@@ -16,6 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
+
 <body class="font-sans antialiased" style="background-color: #AB80E5;">
     <div class="min-h-screen">
         @include('layouts.navigation')
@@ -35,5 +36,6 @@
         </main>
     </div>
 </body>
+@include('components.footer')
 
 </html>

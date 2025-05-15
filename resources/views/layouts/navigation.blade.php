@@ -13,12 +13,37 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <div></div>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-black hover:text-yellow-300">
-                        Inicio
+                    @php
+                        $rol = Auth::user()?->tipo_usuario;
+                    @endphp
+
+                    <!-- Enlace común para todos -->
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
+                        Dashboard
                     </x-nav-link>
-                    <x-nav-link :href="route('objetos.index')" :active="request()->routeIs('objetos.*')" class="text-black hover:text-yellow-300">
-                        {{ __('Mis objetos') }}
+
+                    <x-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')">
+                        {{ __('Mensajes') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('objetos.explorar') }}" :active="request()->routeIs('objetos.explorar')">
+                        {{ __('Explorar objetos') }}
+                    </x-nav-link>
+
+                    <!-- Solo para admin -->
+                    @if ($rol === 'admin')
+                        <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')" class="text-white">
+                            Panel Admin
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Solo para donante o receptor -->
+                    @if (in_array($rol, ['donante', 'receptor']))
+                        <x-nav-link :href="route('objetos.index')" :active="request()->routeIs('objetos.*')" class="text-white">
+                            Mis objetos
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
