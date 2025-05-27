@@ -2,63 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Valoracion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ValoracionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function store(Request $request, User $usuario)
     {
-        //
-    }
+        $request->validate([
+            'puntuacion' => 'required|integer|min:1|max:5',
+            'comentario' => 'nullable|string|max:255',
+            'id_intercambio' => 'required|exists:intercambios,id',
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        Valoracion::create([
+            'puntuacion' => $request->puntuacion,
+            'comentario' => $request->comentario,
+            'id_valorador' => Auth::id(),
+            'id_usuario_valorado' => $usuario->id,
+            'id_intercambio' => $request->id_intercambio,
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('usuarios.show', $usuario)->with('success', 'Valoración enviada.');
     }
 }

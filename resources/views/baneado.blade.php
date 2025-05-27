@@ -3,8 +3,8 @@
         <h2 class="text-xl font-bold text-white leading-tight">Cuenta Baneada</h2>
     </x-slot>
 
-    <div class="min-h-screen flex flex-col items-center justify-center" style="background-color: #AB80E5;">
-        <div class="text-white p-10 rounded-lg shadow-lg max-w-xl text-center" style="background-color: #7959a3;">
+    <div class="min-h-screen flex flex-col items-center justify-center" style="background-color: #ebdba7;">
+        <div class="text-white p-10 rounded-lg shadow-lg max-w-xl text-center" style="background-color: #e2cc82;">
             <h1 class="text-4xl font-extrabold mb-4">Tu cuenta ha sido suspendida</h1>
             <p class="mb-6">
                 Un administrador ha marcado tu cuenta como baneada. No podrás acceder a las funciones de EcoTrueque.

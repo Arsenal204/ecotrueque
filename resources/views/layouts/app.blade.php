@@ -7,6 +7,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'EcoTrueque') }}</title>
+    <!-- Bootstrap (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,13 +24,13 @@
 </head>
 
 
-<body class="font-sans antialiased" style="background-color: #AB80E5;">
+<body class="font-sans antialiased" style="background-color: #ebdba7;">
     <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="shadow" style="background-color: #B4007C;">
+            <header class="shadow" style="background-color: #8dbf48;">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-white">
                     {{ $header }}
                 </div>

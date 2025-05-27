@@ -3,7 +3,7 @@
         <h2 class="text-xl font-bold text-white leading-tight">Conversaciones</h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #e2cc82;">
         <div class="max-w-3xl mx-auto bg-[#B4007C] p-6 rounded shadow text-white">
             <h3 class="text-lg mb-4">Usuarios con los que has hablado</h3>
 

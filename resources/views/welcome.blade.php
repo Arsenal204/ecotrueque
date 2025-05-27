@@ -12,16 +12,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body style="background-color: #AB80E5; font-family: 'Figtree', sans-serif;" class="text-white antialiased">
+<body style="background-color: #ebdba7; font-family: 'Figtree', sans-serif;" class="text-white antialiased">
     <div class="min-h-screen flex flex-col justify-center items-center text-center px-4">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-6">Bienvenido a <span style="color: #FFEA27;">EcoTrueque</span></h1>
+        <h1 class="text-4xl sm:text-5xl font-bold mb-6 " style="color: #000000;">Bienvenido a <span
+                style="color: #45cb20;">EcoTrueque</span></h1>
 
-        <p class="mb-8 text-lg sm:text-xl max-w-2xl">
+        <p class="mb-8 text-lg sm:text-xl max-w-2xl" style="color: #000000;">
             Intercambia o dona objetos usados con otros usuarios de forma sostenible y solidaria. ¡Da una segunda vida a
             lo que ya no usas!
         </p>
 
-        <div class="flex gap-4 flex-col sm:flex-row">
+        <div class="flex gap-4 flex-col sm:flex-row" style="color: #000000">
             <a href="{{ route('register') }}"
                 class="bg-[#45F85A] hover:bg-green-500 text-black px-6 py-3 rounded font-semibold transition">
                 Registrarse
@@ -33,7 +34,7 @@
             </a>
         </div>
 
-        <footer class="mt-16 text-sm text-white/80">
+        <footer class="mt-16 text-sm" style="color: #000000">
             &copy; {{ date('Y') }} EcoTrueque. Todos los derechos reservados.
         </footer>
     </div>

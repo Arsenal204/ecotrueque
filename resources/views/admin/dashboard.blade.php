@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #e2cc82;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-[#B4007C] p-6 rounded shadow text-black">
                 <h3 class="text-lg font-semibold mb-4">Lista de usuarios</h3>

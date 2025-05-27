@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #e2cc82;">
         <div class="max-w-xl mx-auto bg-[#B4007C] text-black p-6 rounded shadow-lg">
             <form action="{{ route('mensajes.store') }}" method="POST">
                 @csrf

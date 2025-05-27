@@ -1,4 +1,4 @@
-<nav class="border-b border-gray-100  dark:border-none" style="background-color: #8160ac;">
+<nav class="border-b border-gray-100  dark:border-none" style="background-color: #8dbf48;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -19,21 +19,29 @@
 
                     <!-- Enlace común para todos -->
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
-                        Dashboard
+                        Inicio
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')">
+                    <x-nav-link href="{{ route('mensajes.index') }}" :active="request()->routeIs('mensajes.index')" class="text-white">
                         {{ __('Mensajes') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('objetos.explorar') }}" :active="request()->routeIs('objetos.explorar')">
+                    <x-nav-link href="{{ route('objetos.explorar') }}" :active="request()->routeIs('objetos.explorar')" class="text-white">
                         {{ __('Explorar objetos') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')" class="text-white">
+                        {{ __('Usuarios') }}
                     </x-nav-link>
 
                     <!-- Solo para admin -->
                     @if ($rol === 'admin')
                         <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')" class="text-white">
                             Panel Admin
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.reclamaciones.index')" :active="request()->routeIs('reclamaciones.*')" class="text-white">
+                            Reclamaciones
                         </x-nav-link>
                     @endif
 
@@ -42,7 +50,28 @@
                         <x-nav-link :href="route('objetos.index')" :active="request()->routeIs('objetos.*')" class="text-white">
                             Mis objetos
                         </x-nav-link>
+
+                        <x-nav-link :href="route('reclamaciones.mias')" :active="request()->routeIs('reclamaciones.mias')" class="text-white">
+                            {{ __('Mis reclamaciones') }}
+                        </x-nav-link>
                     @endif
+
+                    @if (in_array($rol, ['donante', 'receptor']))
+                        <x-nav-link :href="route('intercambios.index')" :active="request()->routeIs('intercambios.*')" class="text-white">
+                            Intercambios
+                            @php
+                                $pendientes = \App\Models\Intercambio::where('id_usuario_receptor', Auth::id())
+                                    ->where('estado', 'pendiente')
+                                    ->count();
+                            @endphp
+                            @if ($pendientes > 0)
+                                <span class="ml-1 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
+                                    {{ $pendientes }}
+                                </span>
+                            @endif
+                        </x-nav-link>
+                    @endif
+
 
                 </div>
             </div>

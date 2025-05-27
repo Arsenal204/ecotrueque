@@ -75,4 +75,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reclamacion::class, 'usuario_reclamado');
     }
+    public function valoraciones()
+    {
+        return $this->hasMany(Valoracion::class, 'id_usuario_valorado');
+    }
 }

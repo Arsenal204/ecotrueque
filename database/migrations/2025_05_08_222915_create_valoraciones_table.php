@@ -13,7 +13,10 @@ return new class extends Migration
             $table->tinyInteger('puntuacion')->unsigned();
             $table->text('comentario')->nullable();
             $table->foreignId('id_intercambio')->constrained('intercambios');
-            $table->foreignId('id_usuario_valorado')->constrained('users');
+            $table->foreignId('id_usuario_valorado')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_valorador')->constrained('users')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

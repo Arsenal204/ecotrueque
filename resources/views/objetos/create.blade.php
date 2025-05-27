@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #ebdba7;">
         <div class="max-w-2xl mx-auto bg-[#B4007C] p-6 rounded shadow text-black">
             <form method="POST" action="{{ route('objetos.store') }}" enctype="multipart/form-data">
                 @csrf

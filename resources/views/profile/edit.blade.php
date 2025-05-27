@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #ebdba7;">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg p-6 text-black" style="background-color: #B4007C;">
+            <div class="overflow-hidden shadow-sm sm:rounded-lg p-6 text-black" style="background-color: #8dbf48;">
 
                 @if (session('status') === 'profile-updated')
                     <div class="mb-4 text-green-300">
@@ -34,6 +34,30 @@
                             value="{{ old('email', Auth::user()->email) }}" required
                             class="mt-1 block w-full rounded bg-white p-2"style="text-color: black;">
                     </div>
+                    <!-- Teléfono -->
+                    <div>
+                        <label for="telefono" class="block text-sm font-medium">Teléfono</label>
+                        <input id="telefono" name="telefono" type="text"
+                            value="{{ old('telefono', Auth::user()->telefono) }}"
+                            class="mt-1 block w-full rounded bg-white p-2 text-black">
+                    </div>
+
+                    <!-- Dirección -->
+                    <div>
+                        <label for="direccion" class="block text-sm font-medium">Dirección</label>
+                        <input id="direccion" name="direccion" type="text"
+                            value="{{ old('direccion', Auth::user()->direccion) }}"
+                            class="mt-1 block w-full rounded bg-white p-2 text-black">
+                    </div>
+
+                    <!-- Ciudad -->
+                    <div>
+                        <label for="ciudad" class="block text-sm font-medium">Ciudad</label>
+                        <input id="ciudad" name="ciudad" type="text"
+                            value="{{ old('ciudad', Auth::user()->ciudad) }}"
+                            class="mt-1 block w-full rounded bg-white p-2 text-black">
+                    </div>
+
 
                     <div class="flex items-center justify-end gap-4">
                         <x-primary-button class="px-4 py-2 rounded" style="background-color: #45F85A; color: black;">

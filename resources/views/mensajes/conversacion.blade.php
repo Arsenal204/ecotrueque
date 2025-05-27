@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #ebdba7;">
         <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded shadow">
             <!-- Zona de mensajes -->
-            <div class="p-6 h-[500px] overflow-y-auto" style="background-color: #AB80E5;">
+            <div class="p-6 h-[500px] overflow-y-auto" style="background-color: #e2cc82;">
                 @forelse ($mensajes as $mensaje)
                     <div class="mb-4 flex {{ $mensaje->id_emisor === auth()->id() ? 'justify-end' : 'justify-start' }}">
                         @if ($mensaje->id_emisor === auth()->id())
@@ -25,18 +25,18 @@
 
             </div>
         @empty
-            <p class="text-center text-white">No hay mensajes aún.</p>
+            <p class="text-center text-black">No hay mensajes aún.</p>
             @endforelse
         </div>
 
         <!-- Formulario de envío -->
         <form method="POST" action="{{ route('mensajes.store') }}"
-            class="flex items-center border-t border-gray-200 p-4"style="background-color: #AB80E5;">
+            class="flex items-center border-t border-gray-200 p-4"style="background-color: #e2cc82;">
             @csrf
             <input type="hidden" name="id_receptor" value="{{ $usuario->id }}">
 
             <input type="text" name="contenido" required placeholder="Escribe un mensaje..."
-                class="flex-1 px-4 py-2 border rounded-lg text-black mr-2"style="background-color: #AB80E5;" />
+                class="flex-1 px-4 py-2 border rounded-lg text-black mr-2"style="background-color: #e2cc82;" />
 
             <button type="submit" class="hover:bg-yellow-400 text-black font-semibold px-4 py-2 rounded transition"
                 style="background-color: #FFEA27;">

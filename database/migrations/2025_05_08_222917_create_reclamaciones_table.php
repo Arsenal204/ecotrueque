@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_usuario_emisor')->constrained('users');
             $table->foreignId('id_usuario_reclamado')->constrained('users');
             $table->foreignId('id_intercambio')->nullable()->constrained('intercambios');
+            $table->string('ruta_imagen')->nullable();
             $table->timestamps();
         });
     }

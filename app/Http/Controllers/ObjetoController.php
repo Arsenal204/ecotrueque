@@ -78,8 +78,14 @@ class ObjetoController extends Controller
 
     public function show(Objeto $objeto)
     {
-        $categorias = Categoria::all();
-        return view('objetos.show', compact('objeto', 'categorias'));
+        // Guardar categorías vistas en sesión
+        $categoriasVistas = session()->get('categorias_vistas', []);
+        if (!in_array($objeto->categoria, $categoriasVistas)) {
+            $categoriasVistas[] = $objeto->categoria;
+            session()->put('categorias_vistas', $categoriasVistas);
+        }
+
+        return view('objetos.show', compact('objeto'));
     }
 
     public function edit(Objeto $objeto)
@@ -158,7 +164,13 @@ class ObjetoController extends Controller
         if ($categoriaId) {
             $query->where('categoria', $categoriaId);
         }
+        if ($request->filled('ciudad')) {
+            $query->whereHas('usuario', function ($q) use ($request) {
+                $q->where('ciudad', $request->ciudad);
+            });
+        }
 
+        $objetos = $query->latest()->paginate(12);
         $objetos = $query->latest()->get();
         $categorias = Categoria::all();
 

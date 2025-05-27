@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
+    <div class="py-6" style="background-color: #ebdba7;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <!-- Botón de añadir nuevo -->

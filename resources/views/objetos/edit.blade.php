@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #AB80E5;">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8 p-6 rounded shadow text-black" style="background-color: #B4007C;">
+    <div class="py-6" style="background-color: #ebdba7;">
+        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8 p-6 rounded shadow text-black" style="background-color: #e2cc82;">
 
             @if (session('success'))
                 <div class="mb-4 p-3 rounded" style="background-color: #45F85A; color: black;">
@@ -68,19 +68,7 @@
                 <div class="mb-4">
                     <label class="block text-sm font-medium mb-2">Imágenes actuales</label>
                     <div class="grid grid-cols-2 gap-4">
-                        @foreach ($objeto->imagenes as $imagen)
-                            <div class="relative">
-                                <img src="{{ asset('storage/' . $imagen->ruta_imagen) }}"
-                                    class="w-full h-32 object-cover rounded shadow" alt="Imagen actual">
-                                <form action="{{ route('galerias.destroy', $imagen) }}" method="POST"
-                                    class="absolute top-1 right-1" onsubmit="return confirm('¿Eliminar esta imagen?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-600 text-white text-xs px-2 py-1 rounded">X</button>
-                                </form>
-                            </div>
-                        @endforeach
+
                     </div>
                 </div>
 
@@ -99,6 +87,20 @@
                     </button>
                 </div>
             </form>
+            @foreach ($objeto->imagenes as $imagen)
+                <div class="relative">
+                    <img src="{{ asset('storage/' . $imagen->ruta_imagen) }}"
+                        class="w-full h-32 object-cover rounded shadow" alt="Imagen actual">
+                    <form action="{{ route('galerias.destroy', $imagen) }}" method="POST"
+                        class="absolute top-1 right-1" onsubmit="return confirm('¿Eliminar esta imagen?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-600 text-white text-s px-3 py-2 rounded mt-2">"Eliminar
+                            imagen (si
+                            elimina la ultima imagen se borrará el objeto)"</button>
+                    </form>
+                </div>
+            @endforeach
         </div>
     </div>
 </x-app-layout>

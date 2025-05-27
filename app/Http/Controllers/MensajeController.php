@@ -35,7 +35,7 @@ class MensajeController extends Controller
 
         Mensaje::create([
             'contenido' => $request->contenido,
-            'id_emisor' => Auth::id(), // ✅
+            'id_emisor' => Auth::id(),
             'id_receptor' => $request->id_receptor,
         ]);
 
