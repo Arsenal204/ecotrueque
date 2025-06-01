@@ -28,7 +28,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($objetos as $objeto)
                         <div class="rounded shadow p-4 flex flex-col justify-between"
-                            style="background-color: #d450aa; color: white;">
+                            style="background-color: #a4dc56; color: white;">
 
                             <!-- Imagen -->
                             @php
@@ -49,24 +49,52 @@
 
                             <!-- Botones -->
                             <div class="mt-4 flex gap-2">
+                                <!-- Ver -->
                                 <button onclick="window.location='{{ route('objetos.show', $objeto) }}'"
                                     class="flex-1 text-white text-sm py-1 px-2 rounded"
-                                    style="background-color: #7db6d4;">
+                                    style="background-color: #7db6d4; display:flex; align-items:center; justify-content:center; gap:0.4rem;">
+                                    <!-- Ojo SVG -->
+                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24"
+                                        style="vertical-align:middle;">
+                                        <path d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"
+                                            stroke="#fff" stroke-width="2" fill="none" />
+                                        <circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="2"
+                                            fill="none" />
+                                    </svg>
                                     Ver
                                 </button>
 
+                                <!-- Editar -->
                                 <button onclick="window.location='{{ route('objetos.edit', $objeto) }}'"
                                     class="flex-1 text-black text-sm py-1 px-2 rounded"
-                                    style="background-color: #e6d324;">
+                                    style="background-color: #e6d324; display:flex; align-items:center; justify-content:center; gap:0.4rem;">
+                                    <!-- Lápiz SVG -->
+                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24"
+                                        style="vertical-align:middle;">
+                                        <path
+                                            d="M4 20h4l10.29-10.29a1 1 0 0 0 0-1.41l-2.59-2.59a1 1 0 0 0-1.41 0L4 16v4z"
+                                            stroke="#222" stroke-width="2" fill="none" />
+                                        <path d="M14.5 7.5l2 2" stroke="#222" stroke-width="2" fill="none" />
+                                    </svg>
                                     Editar
                                 </button>
 
+                                <!-- Eliminar -->
                                 <form action="{{ route('objetos.destroy', $objeto) }}" method="POST" class="flex-1"
-                                    onsubmit="return confirm('¿Eliminar este objeto?');">
+                                    onsubmit="return confirm('¿Eliminar este objeto?');" style="display:flex;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="w-full text-white text-sm py-1 px-2 rounded"
-                                        style="background-color: #e10909;">
+                                        style="background-color: #e10909; display:flex; align-items:center; justify-content:center; gap:0.4rem;">
+                                        <!-- Papelera SVG -->
+                                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24"
+                                            style="vertical-align:middle;">
+                                            <rect x="5" y="7" width="14" height="12" rx="2"
+                                                stroke="#fff" stroke-width="2" fill="none" />
+                                            <path d="M3 7h18" stroke="#fff" stroke-width="2" />
+                                            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#fff"
+                                                stroke-width="2" />
+                                        </svg>
                                         Eliminar
                                     </button>
                                 </form>

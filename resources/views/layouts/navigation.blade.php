@@ -110,8 +110,6 @@
                     </x-slot>
                 </x-dropdown>
             </div>
-
-            <!-- Mobile menu (opcional) -->
         </div>
     </div>
 </nav>

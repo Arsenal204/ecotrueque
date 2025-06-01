@@ -12,32 +12,40 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body style="background-color: #ebdba7; font-family: 'Figtree', sans-serif;" class="text-white antialiased">
-    <div class="min-h-screen flex flex-col justify-center items-center text-center px-4">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-6 " style="color: #000000;">Bienvenido a <span
-                style="color: #45cb20;">EcoTrueque</span></h1>
+<body
+    style="background: linear-gradient(100deg, #e2cc82 60%, #b6e388 100%); font-family: 'Figtree', sans-serif; min-height:100vh; margin:0; padding:0;">
+    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; color:#222;">
+        <div
+            style="background:rgba(255,255,255,0.95); border-radius:1rem; box-shadow:0 8px 32px 0 rgba(34,139,34,0.15); max-width:420px; width:100%; padding:2.5rem 2rem; text-align:center; border:1px solid #b6e388;">
+            <h1 style="font-size:2.5rem; font-weight:800; margin-bottom:1.5rem; color:#222;">
+                Bienvenido a <span style="color: #45cb20;">EcoTrueque</span>
+            </h1>
 
-        <p class="mb-8 text-lg sm:text-xl max-w-2xl" style="color: #000000;">
-            Intercambia o dona objetos usados con otros usuarios de forma sostenible y solidaria. ¡Da una segunda vida a
-            lo que ya no usas!
-        </p>
+            <p style="margin-bottom:2rem; font-size:1.15rem; color:#444;">
+                Intercambia o dona objetos usados con otros usuarios de forma sostenible y solidaria.<br>
+                ¡Da una segunda vida a lo que ya no usas!
+            </p>
 
-        <div class="flex gap-4 flex-col sm:flex-row" style="color: #000000">
-            <a href="{{ route('register') }}"
-                class="bg-[#45F85A] hover:bg-green-500 text-black px-6 py-3 rounded font-semibold transition">
-                Registrarse
-            </a>
-
-            <a href="{{ route('login') }}"
-                class="bg-[#94D7FB] hover:bg-blue-400 text-black px-6 py-3 rounded font-semibold transition">
-                Iniciar sesión
-            </a>
+            <div style="display:flex; flex-direction:column; gap:1rem; align-items:center; justify-content:center;">
+                <a href="{{ route('register') }}"
+                    style="background:#45F85A; color:#222; font-size:1rem; font-weight:600; padding:0.75rem 2.5rem; border-radius:0.5rem; margin-bottom:0.5rem; text-decoration:none; box-shadow:0 2px 8px 0 rgba(34,139,34,0.10); border:none; transition:background 0.2s;"
+                    onmouseover="this.style.background='#76a03b'; this.style.color='#fff';"
+                    onmouseout="this.style.background='#45F85A'; this.style.color='#222';">
+                    Registro
+                </a>
+                <a href="{{ route('login') }}"
+                    style="background:#94D7FB; color:#222; font-size:1rem; font-weight:600; padding:0.75rem 2.5rem; border-radius:0.5rem; text-decoration:none; box-shadow:0 2px 8px 0 rgba(34,139,34,0.10); border:none; transition:background 0.2s;"
+                    onmouseover="this.style.background='#45cb20'; this.style.color:'#fff';"
+                    onmouseout="this.style.background='#94D7FB'; this.style.color='#222';">
+                    Iniciar Sesión
+                </a>
+            </div>
         </div>
-
-        <footer class="mt-16 text-sm" style="color: #000000">
-            &copy; {{ date('Y') }} EcoTrueque. Todos los derechos reservados.
-        </footer>
     </div>
+
+    <footer style="margin-top:2rem; text-align:center; font-size:0.95rem; color:#222;">
+        &copy; {{ date('Y') }} EcoTrueque. Todos los derechos reservados.
+    </footer>
 </body>
 
 </html>

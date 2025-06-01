@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\IntercambioController;
 use App\Http\Controllers\ValoracionController;
 use App\Http\Controllers\ReclamacionController;
+use App\Http\Controllers\ContactoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -72,6 +73,12 @@ Route::middleware(['auth', 'verified', CheckIfBanned::class, RoleManager::class 
 
     Route::get('/usuarios/{usuario}', [UserController::class, 'show'])->name('usuarios.show');
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+
+    //Footer
+    Route::view('/aviso-legal', 'aviso-legal')->name('aviso.legal');
+    Route::view('/politica-privacidad', 'politica-privacidad')->name('politica.privacidad');
+    Route::get('/contacto', fn() => view('contacto'))->name('contacto');
+    Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contacto.enviar');
 });
 
 Route::get('/baneado', function () {
