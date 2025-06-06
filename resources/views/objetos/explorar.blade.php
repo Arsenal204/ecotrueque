@@ -10,7 +10,7 @@
 
             <!-- Filtro por categoría -->
             <form method="GET" action="{{ route('objetos.explorar') }}" class="mb-6 flex items-center gap-4">
-                <label for="categoria" class="text-white font-semibold">Filtrar por categoría:</label>
+                <label for="categoria" class="text-black font-semibold">Filtrar por categoría:</label>
                 <select name="categoria" id="categoria" onchange="this.form.submit()" class="p-2 rounded text-black">
                     <option value="">-- Todas --</option>
                     @foreach ($categorias as $cat)
@@ -21,9 +21,9 @@
                 </select>
                 <!-- Filtro por ciudad -->
                 <div class="mb-4">
-                    <label for="ciudad" class="block text-sm font-medium text-white">Filtrar por ciudad</label>
+                    <label for="ciudad" class="block text-sm font-medium text-black">Filtrar por ciudad</label>
                     <select name="ciudad" id="ciudad" onchange="this.form.submit()"
-                        class="mt-1 block w-full rounded bg-white text-black p-2">
+                        class="mt-1 block w-full rounded  text-black p-2">
                         <option value="">-- Todas las ciudades --</option>
                         <option value="{{ auth()->user()->ciudad }}"
                             {{ request('ciudad') == auth()->user()->ciudad ? 'selected' : '' }}>
@@ -33,32 +33,32 @@
                 </div>
             </form>
 
-
-
             <!-- Tarjetas de objetos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem;">
                 @forelse ($objetos as $objeto)
-                    <div class=" text-white p-4 rounded shadow" style="background-color: #e2cc82;">
+                    <div
+                        style="background-color:#e2cc82; color:#222; padding:1.5rem 1rem; border-radius:1rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); display:flex; flex-direction:column; align-items:center; text-align:center;">
                         <img src="{{ $objeto->imagenes->first() ? asset('storage/' . $objeto->imagenes->first()->ruta_imagen) : asset('images/stock1.jpg') }}"
-                            alt="{{ $objeto->titulo }}" class=" h-40 object-cover rounded mb-3"
-                            style="width: 266px; height: 266px;">
-                        <h3 class="text-lg font-semibold">{{ $objeto->titulo }}</h3>
-                        <p class="text-sm">{{ Str::limit($objeto->descripcion, 100) }}</p>
+                            alt="{{ $objeto->titulo }}"
+                            style="width:220px; height:220px; object-fit:cover; border-radius:0.7rem; background:#fff; box-shadow:0 2px 8px rgba(34,139,34,0.10); margin-bottom:1rem;">
+                        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">{{ $objeto->titulo }}</h3>
+                        <p style="font-size:0.97rem; margin-bottom:0.5rem;">{{ Str::limit($objeto->descripcion, 100) }}
+                        </p>
                         @php
                             $cat = \App\Models\Categoria::find($objeto->categoria);
                         @endphp
-
-                        <p class="text-xs text-gray-300">
+                        <p style="font-size:0.92rem; color:#5C3F94; margin-bottom:1rem;">
                             Categoría: {{ $cat?->nombre_categoria ?? 'Sin categoría' }}
                         </p>
-
                         <a href="{{ route('objetos.show', $objeto) }}"
-                            class="inline-block mt-3 bg-[#FFEA27] text-black px-4 py-1 rounded hover:bg-yellow-400 transition">
+                            style="display:inline-block; margin-top:auto; background:#ffe066; color:#222; padding:0.5rem 1.3rem; border-radius:0.5rem; font-weight:600; font-size:0.98rem; text-decoration:none; box-shadow:0 2px 8px rgba(34,139,34,0.10); transition:background 0.2s;"
+                            onmouseover="this.style.background='#ffe9a7';"
+                            onmouseout="this.style.background='#ffe066';">
                             Ver objeto
                         </a>
                     </div>
                 @empty
-                    <p class="text-white">No se han encontrado objetos.</p>
+                    <p style="color:#b4007c; text-align:center;">No se han encontrado objetos.</p>
                 @endforelse
             </div>
         </div>

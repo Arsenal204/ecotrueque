@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased text-white" style="background-color: #ebdba7;">
+<body class="font-sans antialiased text-white" style=" background: linear-gradient(100deg, #e2cc82 60%, #b6e388 100%);">
     <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
 
         <!-- Logo o nombre -->

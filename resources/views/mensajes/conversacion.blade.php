@@ -19,13 +19,13 @@
                             max-width:70%;
                             padding:0.8rem 1.2rem;
                             border-radius:1rem;
-                            background-color:{{ $mensaje->id_emisor === auth()->id() ? '#ffe066' : '#b4007c' }};
-                            color:{{ $mensaje->id_emisor === auth()->id() ? '#222' : '#fff' }};
+                            background-color:{{ $mensaje->id_emisor === auth()->id() ? '#ffe066' : '#8dbf48' }};
+                            color:{{ $mensaje->id_emisor === auth()->id() ? '#222' : '#000' }};
                             box-shadow:0 2px 8px rgba(34,139,34,0.10);
                             ">
                             <p style="margin:0 0 0.3rem 0; font-size:1rem;">{{ $mensaje->contenido }}</p>
                             <span
-                                style="display:block; font-size:0.85rem; color:{{ $mensaje->id_emisor === auth()->id() ? '#888' : '#ffe066' }};">
+                                style="display:block; font-size:0.85rem; color:{{ $mensaje->id_emisor === auth()->id() ? '#888' : '#494845' }};">
                                 {{ $mensaje->created_at->format('H:i d/m/Y') }}
                             </span>
                         </div>

@@ -145,7 +145,7 @@
             <!-- Formulario para valorar -->
             @if (Auth::id() !== $usuario->id && $puedeValorar && !$yaValorado && isset($intercambio))
                 <div
-                    style="background:#45F85A; color:#222; padding:2rem 2.5rem; border-radius:1rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); margin-bottom:2.5rem;">
+                    style="background:#76a03b; color:#222; padding:2rem 2.5rem; border-radius:1rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); margin-bottom:2.5rem;">
                     <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem;">Valorar a este usuario</h3>
                     <form method="POST" action="{{ route('valoraciones.store', $usuario) }}">
                         @csrf

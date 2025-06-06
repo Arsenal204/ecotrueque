@@ -14,6 +14,8 @@ use App\Http\Controllers\IntercambioController;
 use App\Http\Controllers\ValoracionController;
 use App\Http\Controllers\ReclamacionController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\GitHubController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -68,6 +70,11 @@ Route::middleware(['auth', 'verified', CheckIfBanned::class, RoleManager::class 
     Route::get('/reclamaciones', [ReclamacionController::class, 'misReclamaciones'])->name('reclamaciones.index');
 
 
+    Route::get('/reclamaciones/{id}/pdf', [ReclamacionController::class, 'generarPDF'])
+        ->name('reclamaciones.pdf');
+
+
+
     Route::post('/usuarios/{usuario}/valorar', [ValoracionController::class, 'store'])->name('valoraciones.store');
 
 
@@ -77,8 +84,8 @@ Route::middleware(['auth', 'verified', CheckIfBanned::class, RoleManager::class 
     //Footer
     Route::view('/aviso-legal', 'aviso-legal')->name('aviso.legal');
     Route::view('/politica-privacidad', 'politica-privacidad')->name('politica.privacidad');
-    Route::get('/contacto', fn() => view('contacto'))->name('contacto');
-    Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contacto.enviar');
+    Route::get('/contacto', [ContactoController::class, 'mostrarFormulario'])->name('contacto');
+    Route::post('/contacto', [ContactoController::class, 'enviarFormulario'])->name('contacto.enviar');
 });
 
 Route::get('/baneado', function () {
@@ -91,6 +98,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+
+
+Route::get('/auth/github', [GitHubController::class, 'redirectToGitHub'])->name('github.login');
+Route::get('/auth/github/callback', [GitHubController::class, 'handleGitHubCallback']);
 
 Route::post('/mensaje-a-admin', [MensajeController::class, 'mensajeDesdeBaneado'])->name('mensajes.baneado');
 

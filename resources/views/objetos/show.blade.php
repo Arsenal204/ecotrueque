@@ -24,17 +24,19 @@
                 </div>
 
                 <!-- Información del objeto -->
-                <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:0.7rem; color:#fff;">{{ $objeto->titulo }}
+                <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:0.7rem; color:#000;">{{ $objeto->titulo }}
                 </h3>
-                <p style="margin-bottom:0.3rem;"><strong>Estado:</strong> {{ $objeto->estado }}</p>
-                <p style="margin-bottom:0.3rem;"><strong>Oferta:</strong> {{ ucfirst($objeto->tipo_oferta) }}</p>
+                <p style="margin-bottom:0.3rem;  color:#000;"><strong>Estado:</strong> {{ $objeto->estado }}</p>
+                <p style="margin-bottom:0.3rem;  color:#000;"><strong>Oferta:</strong>
+                    {{ ucfirst($objeto->tipo_oferta) }}</p>
                 @php
                     $cat = \App\Models\Categoria::find($objeto->categoria);
                 @endphp
-                <p style="font-size:0.97rem; color:#f9fafb; margin-bottom:1.2rem;">
+                <p style="font-size:0.97rem;  color:#000; margin-bottom:1.2rem;">
                     <strong>Categoría:</strong> {{ $cat?->nombre_categoria ?? 'Sin categoría' }}
                 </p>
-                <p style="margin-bottom:1.5rem;"><strong>Descripción:</strong><br>{{ $objeto->descripcion }}</p>
+                <p style="margin-bottom:1.5rem; color:#000;"><strong>Descripción:</strong><br>{{ $objeto->descripcion }}
+                </p>
 
                 @if (auth()->check() && auth()->id() !== $objeto->usuario)
                     <div style="margin-top:2rem;">
@@ -56,7 +58,7 @@
 
                 <!-- Botón volver -->
                 <div style="margin-top:2rem;">
-                    <a href="{{ route('objetos.index') }}"
+                    <a href="{{ url()->previous() }}"
                         style="display:inline-block; padding:0.6rem 1.5rem; background:#94D7FB; color:#222; border-radius:0.5rem; font-weight:600; font-size:1rem; text-decoration:none; box-shadow:0 2px 8px rgba(34,139,34,0.10); transition:background 0.2s;"
                         onmouseover="this.style.background='#b6e388';" onmouseout="this.style.background='#94D7FB';">
                         ← Volver al listado

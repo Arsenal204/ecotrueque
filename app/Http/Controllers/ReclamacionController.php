@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Reclamacion;
 use App\Models\Intercambio;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReclamacionController extends Controller
 {
@@ -14,6 +15,15 @@ class ReclamacionController extends Controller
         $intercambio = Intercambio::findOrFail($intercambioId);
         return view('reclamaciones.create', compact('intercambio'));
     }
+
+
+    public function generarPDF($id)
+    {
+        $reclamacion = Reclamacion::with(['emisor', 'reclamado', 'intercambio.objetoEmisor.imagenes', 'intercambio.objetoReceptor.imagenes'])->findOrFail($id);
+        $pdf = Pdf::loadView('reclamaciones.pdf', compact('reclamacion'));
+        return $pdf->download('reclamacion_' . $reclamacion->id . '.pdf');
+    }
+
 
     public function store(Request $request)
     {

@@ -16,6 +16,7 @@
                 <label for="nombre"
                     style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Nombre</label>
                 <input type="text" name="nombre" id="nombre" required
+                    value="{{ old('nombre', Auth::user()->name ?? '') }}"
                     style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#f9fafb; color:#222; font-size:1rem; transition:box-shadow 0.2s, border-color 0.2s;"
                     onfocus="this.style.boxShadow='0 0 0 2px #b6e388'; this.style.borderColor='#76a03b';"
                     onblur="this.style.boxShadow='none'; this.style.borderColor='#ccc';">
@@ -25,6 +26,7 @@
                     style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Correo
                     electrónico</label>
                 <input type="email" name="email" id="email" required
+                    value="{{ old('email', Auth::user()->email ?? '') }}"
                     style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#f9fafb; color:#222; font-size:1rem; transition:box-shadow 0.2s, border-color 0.2s;"
                     onfocus="this.style.boxShadow='0 0 0 2px #b6e388'; this.style.borderColor='#76a03b';"
                     onblur="this.style.boxShadow='none'; this.style.borderColor='#ccc';">
@@ -43,5 +45,42 @@
                 Enviar
             </button>
         </form>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <script>
+            function initMap() {
+                var ubicacion = {
+                    lat: 40.4168,
+                    lng: -3.7038
+                };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: ubicacion
+                });
+                new google.maps.Marker({
+                    position: ubicacion,
+                    map: map
+                });
+            }
+        </script>
+        <script>
+            function initMap() {
+                var ubicacion = {
+                    lat: 40.4168,
+                    lng: -3.7038
+                };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: ubicacion
+                });
+                new google.maps.Marker({
+                    position: ubicacion,
+                    map: map
+                });
+            }
+        </script>
+
+
+
     </div>
 </x-app-layout>

@@ -44,15 +44,22 @@
                         @endforeach
                     </div>
                 @endif
-            </div>
 
-            <div style="margin-top:2rem; text-align:right;">
-                <a href="{{ route('reclamaciones.index') }}"
+            </div>
+            <div style="margin-top:2rem; text-align:left;">
+                <a href="{{ route('reclamaciones.pdf', $reclamacion->id) }}"
                     style="display:inline-block; padding:0.6rem 1.5rem; background:#FFEA27; color:#222; border-radius:0.5rem; font-weight:600; font-size:1rem; text-decoration:none; box-shadow:0 2px 8px rgba(34,139,34,0.10); transition:background 0.2s;"
+                    onmouseover="this.style.background='#ffe066';" onmouseout="this.style.background='#FFEA27';">
+                    Descargar PDF
+                </a>
+                <br>
+
+                <a href="{{ route('reclamaciones.index') }}"
+                    style=" margin-top:1rem; display:inline-block; padding:0.6rem 1.5rem; background:#FFEA27; color:#222; border-radius:0.5rem; font-weight:600; font-size:1rem; text-decoration:none; box-shadow:0 2px 8px rgba(34,139,34,0.10); transition:background 0.2s;"
                     onmouseover="this.style.background='#ffe066';" onmouseout="this.style.background='#FFEA27';">
                     Volver a mis reclamaciones
                 </a>
+
             </div>
         </div>
-    </div>
 </x-app-layout>

@@ -39,6 +39,11 @@
                     onmouseout="this.style.background='#94D7FB'; this.style.color='#222';">
                     Iniciar Sesión
                 </a>
+                <a href="{{ route('github.login') }}"
+                    class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded inline-block">
+                    Iniciar sesión con GitHub
+                </a>
+
             </div>
         </div>
     </div>

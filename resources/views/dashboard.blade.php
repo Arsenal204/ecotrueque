@@ -24,17 +24,13 @@
         </div>
         <!-- Contenido principal -->
         <div class="container">
-            <h3 class="text-2xl font-semibold text-white text-center mb-4">Tus objetos</h3>
+            <h3 class="text-2xl font-semibold text-black text-center mb-4">Tus objetos</h3>
 
             <!-- Carrusel -->
             <div x-data="{
                 active: 0,
                 slides: [
-                    @if ($imagenes && count($imagenes) > 0) {!! collect($imagenes)->map(fn($img) => "'" . asset('storage/' . $img->ruta_imagen) . "'")->implode(',') !!}
-                @else
-                    '{{ asset('images/stock1.jpg') }}',
-                    '{{ asset('images/stock2.jpg') }}',
-                    '{{ asset('images/stock3.jpg') }}' @endif
+                    @if ($imagenes && count($imagenes) > 0) {!! collect($imagenes)->map(fn($img) => "'" . asset('storage/' . $img->ruta_imagen) . "'")->implode(',') !!} @endif
                 ]
             }" class="relative max-w-2xl mx-auto mt-6">
 
@@ -63,7 +59,7 @@
                 </div>
             </div>
 
-            <h3 class="text-xl text-white mt-10 text-center">Productos que te pueden interesar</h3>
+            <h3 class="text-xl text-black mt-10 text-center">Productos que te pueden interesar</h3>
             <div x-data="{
                 active: 0,
                 objetos: {{ Js::from(
@@ -189,7 +185,6 @@
                                 oferta</label>
                             <select name="tipo_oferta"
                                 style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#f9fafb; color:#222; font-size:1rem;">
-                                <option value="donación">Donación</option>
                                 <option value="trueque">Trueque</option>
                             </select>
                         </div>

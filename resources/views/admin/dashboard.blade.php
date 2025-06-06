@@ -8,7 +8,7 @@
     <div style="background-color: #e2cc82; min-height:100vh; padding:3rem 0;">
         <div style="max-width:1100px; margin:0 auto;">
             <div
-                style="background:#57cc59; border-radius:1rem; box-shadow:0 4px 16px rgba(34,139,34,0.10); padding:2.5rem 2rem; color:#fff;">
+                style="background:#8dbf48; border-radius:1rem; box-shadow:0 4px 16px rgba(34,139,34,0.10); padding:2.5rem 2rem; color:#fff;">
                 <h3 style="font-size:1.25rem; font-weight:600; margin-bottom:2rem; letter-spacing:0.01em;">
                     Lista de usuarios
                 </h3>
