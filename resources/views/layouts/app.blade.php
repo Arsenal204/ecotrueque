@@ -41,6 +41,9 @@
         <main class="text-black">
             {{ $slot }}
         </main>
+        @include('components.chatbot')
+        @stack('scripts')
+
     </div>
 </body>
 @include('components.footer')

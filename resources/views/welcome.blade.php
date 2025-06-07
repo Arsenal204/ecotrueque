@@ -40,7 +40,14 @@
                     Iniciar Sesión
                 </a>
                 <a href="{{ route('github.login') }}"
-                    class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded inline-block">
+                    style="background:#222; color:#fff; font-size:1rem; font-weight:600; padding:0.75rem 2.5rem; border-radius:0.5rem; text-decoration:none; box-shadow:0 2px 8px 0 rgba(34,139,34,0.10); border:none; display:inline-flex; align-items:center; gap:0.7rem; transition:background 0.2s;"
+                    onmouseover="this.style.background='#444';" onmouseout="this.style.background='#222';">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        style="vertical-align:middle;">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 2C6.48 2 2 6.58 2 12.26c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0 1 12 6.84c.85.004 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48C19.13 20.54 22 16.74 22 12.26 22 6.58 17.52 2 12 2Z"
+                            fill="#fff" />
+                    </svg>
                     Iniciar sesión con GitHub
                 </a>
 

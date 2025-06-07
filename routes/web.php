@@ -15,6 +15,7 @@ use App\Http\Controllers\ValoracionController;
 use App\Http\Controllers\ReclamacionController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\GitHubController;
+use App\Http\Controllers\ChatbotController;
 
 
 Route::get('/', function () {
@@ -86,6 +87,9 @@ Route::middleware(['auth', 'verified', CheckIfBanned::class, RoleManager::class 
     Route::view('/politica-privacidad', 'politica-privacidad')->name('politica.privacidad');
     Route::get('/contacto', [ContactoController::class, 'mostrarFormulario'])->name('contacto');
     Route::post('/contacto', [ContactoController::class, 'enviarFormulario'])->name('contacto.enviar');
+
+    //Chatbot
+    Route::post('/ekoala/preguntar', [ChatbotController::class, 'preguntar'])->name('ekoala.preguntar');
 });
 
 Route::get('/baneado', function () {

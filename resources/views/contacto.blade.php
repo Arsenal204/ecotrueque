@@ -9,6 +9,19 @@
             <a href="mailto:diegorobles031204@gmail.com"
                 style="color:#b4007c; text-decoration:underline;"><strong>diegorobles031204@gmail.com</strong></a>.
         </p>
+        <div style="margin-top: 2rem;">
+            <h2 style="font-size:1.3rem; font-weight:700; color:#5C3F94; margin-bottom:1rem;">
+                Nuestra ubicación
+            </h2>
+            <div style="border: 2px solid #ccc; border-radius: 1rem; overflow: hidden;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3225.588744446748!2d-6.33899652427036!3d36.79828547350459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0de0bb1ab0e7cb%3A0xc05bb3c6ccc40a8b!2sC.%20Botavara%2C%2010%2C%2011540%20Bonanza%2C%20C%C3%A1diz!5e0!3m2!1ses!2ses!4v1717780421491!5m2!1ses!2ses"
+                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
 
         <form action="{{ route('contacto.enviar') }}" method="POST">
             @csrf
@@ -44,41 +57,9 @@
                 onmouseover="this.style.background='#5C3F94';" onmouseout="this.style.background='#76a03b';">
                 Enviar
             </button>
-        </form>
-        <div id="map" style="width:100%; height:300px;"></div>
-        <div id="map" style="width:100%; height:300px;"></div>
-        <script>
-            function initMap() {
-                var ubicacion = {
-                    lat: 40.4168,
-                    lng: -3.7038
-                };
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 12,
-                    center: ubicacion
-                });
-                new google.maps.Marker({
-                    position: ubicacion,
-                    map: map
-                });
-            }
-        </script>
-        <script>
-            function initMap() {
-                var ubicacion = {
-                    lat: 40.4168,
-                    lng: -3.7038
-                };
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 12,
-                    center: ubicacion
-                });
-                new google.maps.Marker({
-                    position: ubicacion,
-                    map: map
-                });
-            }
-        </script>
+
+
+
 
 
 
