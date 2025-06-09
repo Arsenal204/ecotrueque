@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6 bg-[#AB80E5] min-h-screen">
+    <div class="py-6 min-h-screen">
         <div class="max-w-6xl mx-auto p-6 rounded shadow" style="background-color: #ebdba7;">
 
             <!-- Filtro por categoría -->

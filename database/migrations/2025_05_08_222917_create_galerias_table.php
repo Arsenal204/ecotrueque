@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_imagen');
             $table->string('ruta_imagen');
-            $table->date('fecha_subida')->default(DB::raw('CURRENT_DATE'));
+            $table->date('fecha_subida')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreignId('id_objeto')->constrained('objetos');
 
             $table->timestamps();
