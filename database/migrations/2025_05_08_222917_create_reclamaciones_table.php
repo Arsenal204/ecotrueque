@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('motivo');
             $table->text('descripcion')->nullable();
-            $table->date('fecha_reclamacion')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('fecha_reclamacion');
             $table->enum('estado_reclamacion', ['pendiente', 'en revisión', 'resuelta', 'rechazada']);
             $table->foreignId('id_usuario_emisor')->constrained('users');
             $table->foreignId('id_usuario_reclamado')->constrained('users');

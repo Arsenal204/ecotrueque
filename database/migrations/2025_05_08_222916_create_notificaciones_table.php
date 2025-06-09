@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('notificaciones', function (Blueprint $table) {
             $table->id();
             $table->text('contenido');
-            $table->dateTime('fecha_envio')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('fecha_envio');
             $table->boolean('leido')->default(false);
             $table->foreignId('id_usuario_receptor')->constrained('users');
             $table->timestamps();

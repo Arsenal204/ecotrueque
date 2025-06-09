@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('mensajes', function (Blueprint $table) {
             $table->id();
             $table->text('contenido');
-            $table->dateTime('fecha_envio')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('fecha_envio');
             $table->foreignId('id_emisor')->constrained('users');
             $table->foreignId('id_receptor')->constrained('users');
             $table->foreignId('id_intercambio')->nullable()->constrained('intercambios')->onDelete('cascade');
