@@ -12,9 +12,10 @@ class ChatbotController extends Controller
         $userInput = $request->input('mensaje');
 
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('OPENROUTER_API_KEY'),
-            'HTTP-Referer' => 'https://tudominio.com',
+            'Authorization' => 'Bearer ' . config('services.openrouter.key'),
+            'HTTP-Referer' => 'https://18.212.29.0:8000',
             'X-Title' => 'EcoTrueque',
+            'Content-Type' => 'application/json',
         ])->post('https://openrouter.ai/api/v1/chat/completions', [
             'model' => 'deepseek/deepseek-r1:free',
             'messages' => [
@@ -28,6 +29,13 @@ class ChatbotController extends Controller
                 ],
             ]
         ]);
+
+        if ($response->unauthorized()) {
+            return response()->json([
+                'error' => 'Token inválido o cabecera faltante',
+                'status' => 401
+            ], 401);
+        }
 
         return response()->json($response->json());
     }
