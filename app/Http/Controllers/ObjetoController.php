@@ -160,8 +160,12 @@ class ObjetoController extends Controller
     {
         $categoriaId = $request->input('categoria');
 
-        $query = Objeto::with('categoria', 'imagenes')
-            ->where('usuario', '!=', Auth::id());
+        $query = Objeto::with('categoria', 'imagenes', 'usuario')
+            ->where('usuario', '!=', Auth::id())
+            // Solo objetos de usuarios NO baneados
+            ->whereHas('usuario', function ($q) {
+                $q->where('baneado', 0);
+            });
 
         // Filtrar por categoría
         if ($categoriaId) {

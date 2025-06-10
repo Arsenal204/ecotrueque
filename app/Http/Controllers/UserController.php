@@ -14,12 +14,18 @@ class UserController extends Controller
 
     public function index()
     {
-        $usuarios = User::where('id', '!=',  Auth::id())->get();
+        $usuarios = User::where('id', '!=', Auth::id())
+            ->where('baneado', 0) // Solo usuarios no baneados
+            ->get();
         return view('usuarios.index', compact('usuarios'));
     }
 
     public function show(User $usuario)
     {
+        if ($usuario->baneado) {
+            abort(404); // O puedes redirigir con un mensaje personalizado
+        }
+
         $mediaPuntuacion = $usuario->valoraciones()->avg('puntuacion') ?? 0;
         $valoraciones = $usuario->valoraciones()->with('valorador')->latest()->get();
 

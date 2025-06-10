@@ -56,6 +56,9 @@ class MensajeController extends Controller
                 ];
             })
             ->unique('id')
+            ->filter(function ($user) {
+                return $user && $user->baneado == 0;
+            })
             ->values();
 
         return view('mensajes.index', compact('usuariosConConversacion'));

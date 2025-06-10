@@ -15,12 +15,22 @@ class IntercambioController extends Controller
     {
         $userId = Auth::id();
 
-        $intercambios = Intercambio::with(['objetoEmisor.imagenes', 'objetoReceptor.imagenes', 'objetoEmisor.usuario', 'objetoReceptor.usuario'])
-
-
+        $intercambios = Intercambio::with([
+            'objetoEmisor.imagenes',
+            'objetoReceptor.imagenes',
+            'objetoEmisor.usuario',
+            'objetoReceptor.usuario'
+        ])
             ->where(function ($query) use ($userId) {
                 $query->where('id_usuario_emisor', $userId)
                     ->orWhere('id_usuario_receptor', $userId);
+            })
+            // Filtrar: ni emisor ni receptor pueden estar baneados
+            ->whereHas('emisor', function ($q) {
+                $q->where('baneado', 0);
+            })
+            ->whereHas('receptor', function ($q) {
+                $q->where('baneado', 0);
             })
             ->latest()
             ->get();
