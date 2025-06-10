@@ -200,4 +200,20 @@ class ObjetoController extends Controller
 
         return view('objetos.explorar', compact('objetos', 'categorias', 'categoriaId'));
     }
+
+    public function addImagenes(Request $request, Objeto $objeto)
+    {
+        $request->validate([
+            'imagenes.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:4096'
+        ]);
+
+        if ($request->hasFile('imagenes')) {
+            foreach ($request->file('imagenes') as $imagen) {
+                $ruta = $imagen->store('imagenes', 'public');
+                $objeto->imagenes()->create(['ruta_imagen' => $ruta]);
+            }
+        }
+
+        return redirect()->route('objetos.edit', $objeto)->with('success', 'Imágenes añadidas correctamente.');
+    }
 }

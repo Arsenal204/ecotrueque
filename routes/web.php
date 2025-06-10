@@ -43,6 +43,7 @@ Route::middleware(['auth', 'verified', CheckIfBanned::class, RoleManager::class 
     Route::put('/objeto/{objeto}', [ObjetoController::class, 'update'])->name('objetos.update');
     Route::delete('/objeto/{objeto}', [ObjetoController::class, 'destroy'])->name('objetos.destroy');
     Route::get('/explorar', [ObjetoController::class, 'explorar'])->name('objetos.explorar');
+    Route::post('/objeto/{objeto}/imagenes', [ObjetoController::class, 'addImagenes'])->name('objetos.imagenes.add');
 
 
     Route::delete('/galerias/{galeria}', [GaleriaController::class, 'destroy'])->name('galerias.destroy');
