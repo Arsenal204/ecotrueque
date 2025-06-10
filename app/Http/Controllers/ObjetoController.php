@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Objeto;
 use App\Models\Galeria;
 use App\Models\Categoria;
+use App\Models\Intercambio;
+use App\Models\Reclamacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -161,17 +163,39 @@ class ObjetoController extends Controller
         $query = Objeto::with('categoria', 'imagenes')
             ->where('usuario', '!=', Auth::id());
 
+        // Filtrar por categoría
         if ($categoriaId) {
             $query->where('categoria', $categoriaId);
         }
+
+        // Filtrar por ciudad (usuario relacionado)
         if ($request->filled('ciudad')) {
             $query->whereHas('usuario', function ($q) use ($request) {
                 $q->where('ciudad', $request->ciudad);
             });
         }
 
-        $objetos = $query->latest()->paginate(12);
-        $objetos = $query->latest()->get();
+        // Obtener objetos sin intercambio confirmado,
+        // o que tengan intercambio confirmado pero con reclamación resuelta
+        $objetos = $query->get()->filter(function ($objeto) {
+            // Buscar si este objeto está involucrado en un intercambio confirmado
+            $intercambioConfirmado = Intercambio::where(function ($q) use ($objeto) {
+                $q->where('id_objeto_emisor', $objeto->id)
+                    ->orWhere('id_objeto_receptor', $objeto->id);
+            })->where('estado', 'confirmado')->first();
+
+            if (!$intercambioConfirmado) {
+                return true; // No tiene intercambio confirmado, mostrarlo
+            }
+
+            // Tiene intercambio confirmado, ¿tiene reclamación confirmada o resuelta?
+            $reclamacionAceptada = Reclamacion::where('id_intercambio', $intercambioConfirmado->id)
+                ->whereIn('estado_reclamacion', ['resuelta', 'confirmada'])
+                ->exists();
+
+            return $reclamacionAceptada;
+        });
+
         $categorias = Categoria::all();
 
         return view('objetos.explorar', compact('objetos', 'categorias', 'categoriaId'));

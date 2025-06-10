@@ -47,8 +47,7 @@
                         </div>
                         <!-- Información y botones -->
                         <div style="flex:2; min-width:220px;">
-                            <p><strong>De:</strong> {{ $inter->objetoEmisor->usuario->name ?? 'Usuario desconocido' }}
-                            </p>
+                            <p><strong>De:</strong> {{ $inter->emisor->name ?? 'Usuario desconocido' }}</p>
                             <p><strong>Objeto ofrecido:</strong> {{ $inter->objetoEmisor->titulo }}</p>
                             <p><strong>Tu objeto:</strong> {{ $inter->objetoReceptor->titulo }}</p>
                             <p><strong>Estado:</strong> {{ ucfirst($inter->estado) }}</p>

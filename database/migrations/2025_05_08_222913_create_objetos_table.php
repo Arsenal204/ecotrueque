@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descripcion')->nullable();
             $table->string('estado');
-            $table->date('fecha_publicacion');
+            $table->date('fecha_publicacion')->nullable();
             $table->enum('tipo_oferta', ['donación', 'trueque']);
             $table->foreignId('usuario')->constrained('users');
             $table->foreignId('categoria')->constrained('categorias');

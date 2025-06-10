@@ -1,72 +1,82 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight">
+        <h2 style="font-size:1.5rem; font-weight:700; color:#5C3F94;">
             {{ __('Editar perfil') }}
         </h2>
     </x-slot>
 
-    <div class="py-6" style="background-color: #ebdba7;">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg p-6 text-black" style="background-color: #8dbf48;">
+    <div style="background-color: #ebdba7; min-height:100vh; padding:2rem 0;">
+        <div style="max-width:600px; margin:0 auto;">
+            <div
+                style="background:#8dbf48; border-radius:1rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); padding:2.5rem 2rem; color:#222;">
 
                 @if (session('status') === 'profile-updated')
-                    <div class="mb-4 text-green-300">
+                    <div style="margin-bottom:1.5rem; color:#45F85A; font-weight:600;">
                         Perfil actualizado correctamente.
                     </div>
                 @endif
 
-                <form method="post" action="{{ route('profile.update') }}" class="space-y-6">
+                <form method="post" action="{{ route('profile.update') }}">
                     @csrf
                     @method('patch')
 
                     <!-- Nombre -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium">Nombre</label>
+                    <div style="margin-bottom:1.2rem;">
+                        <label for="name"
+                            style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Nombre</label>
                         <input id="name" name="name" type="text"
                             value="{{ old('name', Auth::user()->name ?? '') }}" required autofocus
-                            class="mt-1 block w-full rounded bg-white p-2"style="text-color: black;">
+                            style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222; font-size:1rem;">
                     </div>
 
                     <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium">Correo electrónico</label>
+                    <div style="margin-bottom:1.2rem;">
+                        <label for="email"
+                            style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Correo
+                            electrónico</label>
                         <input id="email" name="email" type="email"
                             value="{{ old('email', Auth::user()->email) }}" required
-                            class="mt-1 block w-full rounded bg-white p-2"style="text-color: black;">
+                            style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222; font-size:1rem;">
                     </div>
+
                     <!-- Teléfono -->
-                    <div>
-                        <label for="telefono" class="block text-sm font-medium">Teléfono</label>
+                    <div style="margin-bottom:1.2rem;">
+                        <label for="telefono"
+                            style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Teléfono</label>
                         <input id="telefono" name="telefono" type="text"
                             value="{{ old('telefono', Auth::user()->telefono) }}"
-                            class="mt-1 block w-full rounded bg-white p-2 text-black">
+                            style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222; font-size:1rem;">
                     </div>
 
                     <!-- Dirección -->
-                    <div>
-                        <label for="direccion" class="block text-sm font-medium">Dirección</label>
+                    <div style="margin-bottom:1.2rem;">
+                        <label for="direccion"
+                            style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Dirección</label>
                         <input id="direccion" name="direccion" type="text"
                             value="{{ old('direccion', Auth::user()->direccion) }}"
-                            class="mt-1 block w-full rounded bg-white p-2 text-black">
+                            style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222; font-size:1rem;">
                     </div>
 
                     <!-- Ciudad -->
-                    <div>
-                        <label for="ciudad" class="block text-sm font-medium">Ciudad</label>
+                    <div style="margin-bottom:1.2rem;">
+                        <label for="ciudad"
+                            style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Ciudad</label>
                         <input id="ciudad" name="ciudad" type="text"
                             value="{{ old('ciudad', Auth::user()->ciudad) }}"
-                            class="mt-1 block w-full rounded bg-white p-2 text-black">
+                            style="width:100%; padding:0.7rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222; font-size:1rem;">
                     </div>
 
-
-                    <div class="flex items-center justify-end gap-4">
-                        <x-primary-button class="px-4 py-2 rounded" style="background-color: #45F85A; color: black;">
+                    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
+                        <button type="submit"
+                            style="background:#45F85A; color:#222; font-weight:700; padding:0.7rem 2rem; border-radius:0.5rem; border:none; font-size:1rem; cursor:pointer; transition:background 0.2s;"
+                            onmouseover="this.style.background='#76a03b';"
+                            onmouseout="this.style.background='#45F85A';">
                             Guardar
-                        </x-primary-button>
+                        </button>
                     </div>
                 </form>
 
-                <hr class="my-6 border-white">
+                <hr style="margin:2rem 0; border:0; border-top:1px solid #fff;">
 
                 <!-- Eliminar cuenta -->
                 <form method="post" action="{{ route('profile.destroy') }}"
@@ -74,7 +84,9 @@
                     @csrf
                     @method('delete')
 
-                    <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">
+                    <button type="submit"
+                        style="background:#b4007c; color:#fff; font-weight:700; padding:0.7rem 2rem; border-radius:0.5rem; border:none; font-size:1rem; cursor:pointer; transition:background 0.2s;"
+                        onmouseover="this.style.background='#8d005c';" onmouseout="this.style.background='#b4007c';">
                         Eliminar cuenta
                     </button>
                 </form>
