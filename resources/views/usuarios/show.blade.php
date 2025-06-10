@@ -19,13 +19,35 @@
 
             <!-- Objetos publicados -->
             <div style="margin-bottom:2.5rem;">
-                <h3 style="font-size:1.2rem; font-weight:700; color:#5C3F94; margin-bottom:1.2rem;">Objetos publicados
-                    por {{ $usuario->name }}</h3>
+                <h3 style="font-size:1.2rem; font-weight:700; color:#5C3F94; margin-bottom:1.2rem;">
+                    Objetos publicados por {{ $usuario->name }}
+                </h3>
                 @php
                     $objetos = \App\Models\Objeto::with('imagenes', 'categoria')
                         ->where('usuario', $usuario->id)
                         ->latest()
-                        ->get();
+                        ->get()
+                        ->filter(function ($objeto) {
+                            $intercambioConfirmado = \App\Models\Intercambio::where(function ($q) use ($objeto) {
+                                $q->where('id_objeto_emisor', $objeto->id)->orWhere('id_objeto_receptor', $objeto->id);
+                            })
+                                ->where('estado', 'confirmado')
+                                ->first();
+
+                            if (!$intercambioConfirmado) {
+                                return true;
+                            }
+
+                            // Si tiene intercambio confirmado, comprobar reclamación aceptada
+                            $reclamacionAceptada = \App\Models\Reclamacion::where(
+                                'id_intercambio',
+                                $intercambioConfirmado->id,
+                            )
+                                ->whereIn('estado_reclamacion', ['resuelta', 'confirmada'])
+                                ->exists();
+
+                            return $reclamacionAceptada;
+                        });
                 @endphp
 
                 @if ($objetos->isEmpty())
