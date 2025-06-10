@@ -82,7 +82,48 @@
                 </div>
 
                 <!-- Imágenes actuales -->
+                <div style="margin-bottom:1.2rem;">
+                    <label style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Imágenes
+                        actuales</label>
+                    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;">
+                        @foreach ($objeto->imagenes as $imagen)
+                            <div style="position:relative;">
+                                <img src="{{ asset('storage/' . $imagen->ruta_imagen) }}"
+                                    style="width:100%; height:110px; object-fit:cover; border-radius:0.5rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); border:1px solid #ddd;">
+                                <form action="{{ route('galerias.destroy', $imagen) }}" method="POST"
+                                    style="position:absolute; top:8px; right:8px;"
+                                    onsubmit="return confirm('¿Eliminar esta imagen?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        style="background:#e10909; color:#fff; border:none; border-radius:0.5rem; padding:0.3rem 0.6rem; font-size:1rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); display:flex; align-items:center; gap:0.2rem;">
+                                        <!-- Papelera SVG -->
+                                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"
+                                            style="vertical-align:middle;">
+                                            <rect x="5" y="7" width="14" height="12" rx="2"
+                                                stroke="#fff" stroke-width="2" fill="none" />
+                                            <path d="M3 7h18" stroke="#fff" stroke-width="2" />
+                                            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#fff"
+                                                stroke-width="2" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div style="font-size:0.95rem; color:#e10909; margin-top:0.5rem;">
+                        Si eliminas la última imagen, se borrará el objeto.
+                    </div>
+                </div>
 
+                <!-- Subir nuevas imágenes (¡ahora dentro del form!) -->
+                <div style="margin-bottom:2rem;">
+                    <label for="imagenes"
+                        style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Añadir nuevas
+                        imágenes</label>
+                    <input type="file" name="imagenes[]" id="imagenes" multiple
+                        style="width:100%; padding:0.5rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222;">
+                </div>
 
                 <!-- Botón de guardar -->
                 <div style="text-align:right;">
@@ -92,48 +133,6 @@
                     </button>
                 </div>
             </form>
-            <div style="margin-bottom:1.2rem;">
-                <label style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Imágenes
-                    actuales</label>
-                <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;">
-                    @foreach ($objeto->imagenes as $imagen)
-                        <div style="position:relative;">
-                            <img src="{{ asset('storage/' . $imagen->ruta_imagen) }}"
-                                style="width:100%; height:110px; object-fit:cover; border-radius:0.5rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); border:1px solid #ddd;">
-                            <form action="{{ route('galerias.destroy', $imagen) }}" method="POST"
-                                style="position:absolute; top:8px; right:8px;"
-                                onsubmit="return confirm('¿Eliminar esta imagen?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    style="background:#e10909; color:#fff; border:none; border-radius:0.5rem; padding:0.3rem 0.6rem; font-size:1rem; box-shadow:0 2px 8px rgba(34,139,34,0.10); display:flex; align-items:center; gap:0.2rem;">
-                                    <!-- Papelera SVG -->
-                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24"
-                                        style="vertical-align:middle;">
-                                        <rect x="5" y="7" width="14" height="12" rx="2" stroke="#fff"
-                                            stroke-width="2" fill="none" />
-                                        <path d="M3 7h18" stroke="#fff" stroke-width="2" />
-                                        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#fff"
-                                            stroke-width="2" />
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
-                    @endforeach
-                </div>
-                <div style="font-size:0.95rem; color:#e10909; margin-top:0.5rem;">
-                    Si eliminas la última imagen, se borrará el objeto.
-                </div>
-            </div>
-
-            <!-- Subir nuevas imágenes -->
-            <div style="margin-bottom:2rem;">
-                <label for="imagenes"
-                    style="display:block; font-weight:600; color:#5C3F94; margin-bottom:0.3rem;">Añadir nuevas
-                    imágenes</label>
-                <input type="file" name="imagenes[]" id="imagenes" multiple
-                    style="width:100%; padding:0.5rem; border-radius:0.5rem; border:1px solid #ccc; background:#fff; color:#222;">
-            </div>
         </div>
     </div>
 </x-app-layout>
